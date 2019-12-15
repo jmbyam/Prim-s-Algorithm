@@ -17,6 +17,7 @@ using std::vector;
 #include <algorithm>
 using std::any_of;
 
+
 void prims( vector<vector<int>> graph ) {
     
     cout << "The minimum spanning tree of the given graph is..." << endl;
@@ -27,7 +28,7 @@ void prims( vector<vector<int>> graph ) {
     });
     
     vector<int> reached ={};
-    while( graph.size() != 0 ) {
+    while( !graph.empty() ) {
         cout << "{" << graph[0][0] << ", " << graph[0][1] << ", " << graph[0][2] << "}" << endl;
         
         // add first and second element to list of vertexes if they aren't already there
@@ -38,13 +39,12 @@ void prims( vector<vector<int>> graph ) {
           reached.push_back(graph[0][1]);
         }
         // if a vector has a first element and second element that have both been reached, remove it.
-        int counter = 0;
-        for ( vector<int> edge : graph ) {
-            if ( edge.size() == 0 ) continue;
-            if ( any_of(reached.begin(), reached.end(), [edge](int i){return i==edge[0];}) && any_of(reached.begin(), reached.end(), [edge](int i){return i==edge[1];}) ){
-                graph.erase(graph.begin()+counter);
+        for ( int i = 0; i < graph.size(); ++i ) {
+            if ( graph[i].empty() ) continue;
+            if ( any_of(reached.begin(), reached.end(), [i, graph](int x){return x==graph[i][0];}) && any_of(reached.begin(), reached.end(), [i, graph](int x){return x==graph[i][1];}) ){
+                graph.erase(graph.begin()+i);
+                i = -1;
             }
-            counter++;
         }
     }
     
