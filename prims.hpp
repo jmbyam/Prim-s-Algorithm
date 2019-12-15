@@ -28,7 +28,7 @@ void prims( vector<vector<int>> graph ) {
     
     vector<int> reached ={};
     while( graph.size() != 0 ) {
-        cout << "{" << graph[0][0] << ", " << graph[graph.size()-1][1] << ", " << graph[0][2] << "}" << endl;
+        cout << "{" << graph[0][0] << ", " << graph[0][1] << ", " << graph[0][2] << "}" << endl;
         
         // add first and second element to list of vertexes if they aren't already there
         if (std::find(reached.begin(), reached.end(), graph[0][0]) == reached.end()) {
